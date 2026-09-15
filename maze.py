@@ -24,17 +24,41 @@ class StackFrontier():
         if self.empty():
             raise  Exception("Empty Frontier")
         else:
-            self.take_last_added()
+            return self.take_last_added()
 
-def Create_maze(Size, branch_chance):
+
+class cell():
+    def __init__(self, row, col, val):
+        self.row = row
+        self.col = col
+        #The values should represent possible states, e.g 0 = wall(no node), 1 = genesis node so start there, 2 = regular node, 3 = goal(could be multiple)
+
+        self.val = val
+
+def Create_maze(Size, branch_chance, rows, columns):
     maze = []
+    grid = []
     #create genesis first child.
     Genesis_Node = Node("unexplored", None, None)
     maze.append(Genesis_Node)
 
     No_Child = [Genesis_Node]
+
+    for x in range(rows):
+        for y in range(columns):
+            new_cell = cell(x, y, None)
+            grid.append(new_cell)
+
+    Genesis_Node.state = (random.randrange(rows), random.randrange(columns))
+
+
+
+
+
+
+
     for i in range(Size - 1):
-        print(f"size_of_mize: {len(maze)}no_child = {len(No_Child)}, maze: {No_Child}")
+        #print(f"size_of_mize: {len(maze)}no_child = {len(No_Child)}, maze: {No_Child}")
         new_parent = random.choice(No_Child)
 
 
@@ -46,7 +70,7 @@ def Create_maze(Size, branch_chance):
         maze.append(new_node)
     return maze
 
-new_maze = Create_maze(12, 0.8)
+new_maze = Create_maze(12, 0.8, 5, 5)
 
 
 
@@ -56,4 +80,3 @@ new_maze = Create_maze(12, 0.8)
 
 frontier = StackFrontier()
 
-maze = Create_maze(12, 0.15)
