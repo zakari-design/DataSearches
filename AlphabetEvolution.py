@@ -61,7 +61,7 @@ while not Completed:
     Second_Highest_Score = 0
     Highest_Scorer, Highest_Score, Completed = Get_Highest_Score(Population)
     Population.remove(Highest_Scorer)
-    Second_Highest_Scorer, Second_Highest_Score, Completed = Get_Highest_Score(Population)
+    Second_Highest_Scorer, Second_Highest_Score, useless = Get_Highest_Score(Population)
 
 
     print(f"Highest Score = {Highest_Score}, Highest Scorer = {Highest_Scorer}")
